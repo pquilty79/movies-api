@@ -46,18 +46,20 @@ public class MovieServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut (HttpServletRequest request, HttpServletResponse response) {
+    protected void doPut (HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
+        BufferedReader br = request.getReader();
+        Movie editedMovie = new Gson().fromJson(br, Movie.class);
         try {
             PrintWriter out = response.getWriter();
             String [] uriParts = request.getRequestURI().split("/");
             int targetId = Integer.parseInt(uriParts[uriParts.length - 1]);
             for(Movie movie : movies) {
                 if (targetId == movie.getId()){
-                    movies.set(movies.indexOf(movie), movie);
+                    movies.set(movies.indexOf(movie),editedMovie );
                 }
             }
-
+            out.println("Movie edited");
         } catch (IOException ex){
             ex.printStackTrace();
         }
@@ -68,7 +70,10 @@ public class MovieServlet extends HttpServlet {
         response.setContentType("application/json");
         try {
             PrintWriter out = response.getWriter();
-
+            String [] uriParts = request.getRequestURI().split("/");
+            int targetId = Integer.parseInt(uriParts[uriParts.length - 1]);
+            movies.removeIf(movie -> targetId == movie.getId());
+            out.println("Movie deleted");
 
         } catch (IOException ex){
             ex.printStackTrace();
