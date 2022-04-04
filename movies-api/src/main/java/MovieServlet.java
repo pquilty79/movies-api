@@ -30,14 +30,15 @@ public class MovieServlet extends HttpServlet {
     @Override
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
-        Movie[] newMovies = new Gson().fromJson(request.getReader(), Movie[].class);
+        BufferedReader br = request.getReader();
+        Movie[] newMovies = new Gson().fromJson(br, Movie[].class);
         for (Movie movie : newMovies) {
             movie.setId(nextId++);
             movies.add(movie);
         }
         try {
             PrintWriter out = response.getWriter();
-            out.println("Movie added");
+            out.println("Movie(s) added");
 
         } catch (IOException ex){
             ex.printStackTrace();
@@ -49,7 +50,13 @@ public class MovieServlet extends HttpServlet {
         response.setContentType("application/json");
         try {
             PrintWriter out = response.getWriter();
-
+            String [] uriParts = request.getRequestURI().split("/");
+            int targetId = Integer.parseInt(uriParts[uriParts.length - 1]);
+            for(Movie movie : movies) {
+                if (targetId == movie.getId()){
+                    movies.set(movies.indexOf(movie), movie);
+                }
+            }
 
         } catch (IOException ex){
             ex.printStackTrace();
@@ -67,8 +74,6 @@ public class MovieServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
-
-
 
 
 
