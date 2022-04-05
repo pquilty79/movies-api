@@ -6,7 +6,7 @@ import java.io.ObjectInputFilter;
 
 public class MoviesDaoFactory {
 
-//    private static Config config = new Config();
+    private static Config config = new Config();
 
     public enum DAOType {MYSQL, IN_MEMORY}
 
