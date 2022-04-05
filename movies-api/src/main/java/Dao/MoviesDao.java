@@ -1,4 +1,6 @@
-package data;
+package Dao;
+import data.Movie;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public interface MoviesDao {
 
     Movie findOne(int id);
 
-    void insert(Movie movie);
+    void insert(Movie movie) throws SQLException;
 
     void insertAll(Movie[] movies) throws SQLException;
 

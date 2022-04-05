@@ -1,22 +1,19 @@
 import com.google.gson.Gson;
 import data.Movie;
-import data.MoviesDao;
-import data.MoviesDaoFactory;
+import Dao.MoviesDao;
 
 import java.io.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 
-import static data.MoviesDaoFactory.DAOType.IN_MEMORY;
-import static data.MoviesDaoFactory.getMoviesDao;
+import static Dao.MoviesDaoFactory.DAOType.IN_MEMORY;
+import static Dao.MoviesDaoFactory.getMoviesDao;
 
 @WebServlet(name = "MovieServlet", urlPatterns = "/movies/*")
 public class MovieServlet extends HttpServlet {
 
-    ArrayList<Movie> movies = new ArrayList<>();
     MoviesDao moviesDao = getMoviesDao(IN_MEMORY);
 
     @Override

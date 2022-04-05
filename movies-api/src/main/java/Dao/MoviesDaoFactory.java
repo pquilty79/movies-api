@@ -1,8 +1,6 @@
-package data;
+package Dao;
 
-//import data.MySqlMoviesDao;
-
-import java.io.ObjectInputFilter;
+import data.Config;
 
 public class MoviesDaoFactory {
 
@@ -17,6 +15,9 @@ public class MoviesDaoFactory {
         switch (daoType) {
             case IN_MEMORY: { //yet we have one switch case. We'll get to that!
                 return new InMemoryMoviesDao();
+            }
+            case MYSQL:{ // <-- added this
+                return MySqlMoviesDao(config);
             }
         }
         return null;
