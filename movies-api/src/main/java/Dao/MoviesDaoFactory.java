@@ -8,8 +8,6 @@ public class MoviesDaoFactory {
 
     public enum DAOType {MYSQL, IN_MEMORY}
 
-    ; //Notice we have two values here
-
     public static MoviesDao getMoviesDao(DAOType daoType) {
 
         switch (daoType) {
@@ -17,7 +15,7 @@ public class MoviesDaoFactory {
                 return new InMemoryMoviesDao();
             }
             case MYSQL:{ // <-- added this
-                return MySqlMoviesDao(config);
+                return new MySqlMoviesDao(config);
             }
         }
         return null;

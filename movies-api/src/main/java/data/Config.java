@@ -4,15 +4,15 @@ package data;
 public class Config {
 
     public String getUrl(){
-        return "jdbc:mysql://localhost:3306/movies_db?serverTimezone=UTC&useSSL=false";
+        return "jdbc:mysql://emp.fulgentcorp.com:3306/patrick";
     }
 
     public String getUser(){
-        return "root";
+        return "patrick";
     }
 
     public String getPassword(){
-        return "codeup";
+        return "JAZ2W9TfdfsnBfPc";
     }
 }
 
