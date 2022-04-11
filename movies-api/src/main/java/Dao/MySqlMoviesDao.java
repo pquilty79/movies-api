@@ -62,7 +62,7 @@ public class MySqlMoviesDao implements MoviesDao {
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
         ResultSet rs = statement.executeQuery();
-//        rs.next();
+        rs.next();
         return new Movie(rs.getString("title"),
                 rs.getString("director"),
                 rs.getString("actors"),
